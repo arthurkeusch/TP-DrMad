@@ -5,7 +5,8 @@
         <span :style="style" v-html="label"></span>
       </template>
     </NavBar>
-    <h1>Welcome to DrMad app</h1>
+    <h3 class="big_title">Welcome to DrMad app</h3>
+      <hr>
     <router-view/>
   </div>
 </template>
@@ -63,3 +64,35 @@ export default {
   },
 };
 </script>
+<style>
+#app{
+    padding-left: 20px;
+    font-family: Bahnschrift;
+}
+a, button{
+    border-radius: 10px;
+    border: 2px solid darkred;
+    background-color: darkred;
+    color: aliceblue;
+    padding: 5px;
+    font-size: large;
+    font-weight: bold;
+}
+span, p, label{
+    color: darkred;
+    font-size: x-large;
+    padding-right: 20px;
+}
+.big_title{
+    font-size: xxx-large;
+    color: darkred;
+}
+h1{
+  font-size: xx-large;
+  color: #bd6905;
+}
+h3{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+</style>

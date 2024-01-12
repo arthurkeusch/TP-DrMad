@@ -1,9 +1,15 @@
 <template>
-  <div>
-    <h1>Login</h1>
-    <span>login</span><input v-model="login">
-    <span>password</span><input v-model="password">
-    <button @click="shopLogin({login, password})">Login</button>
+  <div style="display: block" >
+    <h2>Login</h2>
+    <div class="item">
+        <span >login :</span><input v-model="login">
+    </div>
+    <div class="item">
+      <span>password :</span><input v-model="password">
+    </div>
+    <div class="item">
+      <button @click="shopLogin({login, password})">Login</button>
+    </div>
   </div>
 </template>
 
@@ -26,3 +32,8 @@ export default {
   }
 }
 </script>
+<style>
+.item{
+    margin: 10px;
+}
+</style>

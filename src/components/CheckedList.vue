@@ -1,31 +1,33 @@
 <!-- CheckedList.vue -->
 <template>
-  <div>
-    <div v-for="(item, index) in data" :key="index">
+  <div >
+    <div v-for="(item, index) in data" :key="index" class="liste">
       <input
           v-if="checkbox"
           type="checkbox"
           :checked="checkedViruses[index]"
           @change="toggleCheckbox(index)"
+          class="item"
       />
-      {{ displayItem(item, index) }}
+      <p class="item">{{ displayItem(item, index) }}</p>
       <input
           v-if="itemAmount"
           type="number"
           v-model="amountInput[index]"
           min="1"
+          class="item"
       />
-      <button v-if="itemButton.show" @click="itemButtonClick(index)">
+      <button v-if="itemButton.show" @click="itemButtonClick(index)" class="item">
         {{ itemButton.text }}
       </button>
-      <button v-if="itemButtonPayer.show && commandeStatus[index]" @click="payer(item.uuid)">
+      <button v-if="itemButtonPayer.show && commandeStatus[index]" @click="payer(item.uuid)" class="item">
         {{ itemButtonPayer.text }}
       </button>
-      <button v-if="itemButtonAnnuler.show && commandeStatus[index]" @click="itemButtonAnnulerClick(item.uuid)">
+      <button v-if="itemButtonAnnuler.show && commandeStatus[index]" @click="itemButtonAnnulerClick(item.uuid)" class="item">
         {{ itemButtonAnnuler.text }}
       </button>
     </div>
-    <button v-if="listButton.show" @click="addAllToCart">
+    <button v-if="listButton.show" @click="addAllToCart" style="margin: 10px">
       {{ listButton.text }}
     </button>
   </div>
@@ -94,3 +96,13 @@ export default {
   },
 };
 </script>
+<style>
+.liste{
+    display: flex;
+    justify-content: space-around;
+    border-right: 2px solid darkred;
+}
+.item{
+    margin: 10px;
+}
+</style>

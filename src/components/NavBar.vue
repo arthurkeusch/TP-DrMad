@@ -33,4 +33,21 @@ export default {
 .nav-button {
   padding: 10px;
 }
+table{
+    background-color: darkred;
+    border: darkred;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+
+}
+button{
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: xx-large;
+    font-weight: bold;
+    background-color: aliceblue;
+    color: darkred;
+}
 </style>

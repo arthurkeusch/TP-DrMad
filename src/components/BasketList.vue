@@ -17,7 +17,7 @@
         :itemAmount="false"
         :checkbox="false"
     />
-    <button @click="checkout">Acheter</button>
+    <button @click="checkout" style="margin: 10px">Acheter</button>
   </div>
 </template>
 

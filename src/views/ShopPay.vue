@@ -6,6 +6,7 @@
       <label for="idcmd">Identifiant de la commande : </label>
       <input v-model="idcmd" type="text" id="idcmd"/>
     </div>
+      <br>
     <button @click="paiement">Payer la commande</button>
   </div>
 </template>
