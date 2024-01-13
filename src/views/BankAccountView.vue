@@ -11,7 +11,7 @@
 
 <script>
 
-import {mapActions} from 'vuex'
+import {mapActions, mapMutations} from 'vuex'
 export default {
   name: 'BankAccountView',
 
@@ -21,6 +21,7 @@ export default {
 
   methods: {
     ...mapActions(['getAccount', 'getAccountAmount']),
+    ...mapMutations(['updateAccountNumberError']),
 
     resetAccountNumber() {
       this.number = ''

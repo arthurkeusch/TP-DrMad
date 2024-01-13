@@ -7,26 +7,25 @@
   </div>
 </template>
 
-<script setup>
-import {ref, computed, defineProps} from 'vue';
-
-// Utiliser defineProps pour déclarer les props
-const {balance} = defineProps(['balance']);
-
-// Utiliser une référence pour le solde
-const balanceRef = ref(balance);
-
-// Calculer le style en fonction du solde (rouge si négatif, vert si positif)
-const balanceStyle = computed(() => {
-  return {
-    color: balanceRef.value < 0 ? 'red' : 'green',
-  };
-});
-
-// Formater le solde avec le symbole €
-const formattedBalance = computed(() => {
-  return `${balanceRef.value} €`;
-});
+<script>
+export default {
+  props: {
+    balance: {
+      type: Number,
+      required: true,
+    },
+  },
+  computed: {
+    balanceStyle() {
+      return {
+        color: this.balance < 0 ? 'red' : 'green',
+      };
+    },
+    formattedBalance() {
+      return `${this.balance} €`;
+    },
+  },
+};
 </script>
 
 <style scoped>
