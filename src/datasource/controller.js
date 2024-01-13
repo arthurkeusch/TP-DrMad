@@ -46,18 +46,19 @@ function createWithdraw(id_account, amount) {
   if (!id_account) return { error: 1, status: 404, data: 'aucun numéro de compte bancaire fourni' };
   let account = bankaccounts.find(a => a._id === id_account);
   if (!account) return { error: 1, status: 404, data: 'numéro de compte bancaire incorrect' };
+  let curentAmount = account["amount"];
   let newTrans = {
     _id: generateId(),
-    amount: -amount,
+    amount: -amount["amount"],
     account: id_account,
     date: { $date: new Date().toISOString() },
     uuid: uuidv4()
   };
-  account.amount -= amount;
+  curentAmount -= amount["amount"];
   let updatedAccountIndex = bankaccounts.findIndex(a => a._id === id_account);
   bankaccounts[updatedAccountIndex].amount = account.amount;
   transactions.push(newTrans);
-  return { error: 0, status: 200, data: { uuid: newTrans.uuid, amount: account.amount } };
+  return { error: 0, status: 200, data: { uuid: newTrans["uuid"], amount: curentAmount } };
 }
 
 function generateId() {
@@ -67,6 +68,8 @@ function generateId() {
 }
 
 function createPayment(id_account, amount, destination) {
+  console.log(amount) //montant + dest
+  console.log(destination) //src
   if (!id_account) return { error: 1, status: 404, data: 'aucun numéro de compte bancaire fourni' };
   let account = bankaccounts.find(a => a._id === id_account);
   if (!account) return { error: 1, status: 404, data: 'numéro de compte bancaire incorrect' };
@@ -74,12 +77,13 @@ function createPayment(id_account, amount, destination) {
   if (!destAccount) return { error: 1, status: 404, data: 'compte destinataire inexistant' };
   let newTrans = {
     _id: generateId(),
-    amount: amount,
-    account: id_account,
-    destination: destination,
+    amount: amount["amount"],
+    account: destination,
+    destination: amount["recipient"],
     date: { $date: new Date().toISOString() },
     uuid: uuidv4()
   };
+  console.log(newTrans)
   account.amount -= amount;
   destAccount.amount += amount;
   let updatedAccountIndex = bankaccounts.findIndex(a => a._id === id_account);
@@ -87,7 +91,7 @@ function createPayment(id_account, amount, destination) {
   bankaccounts[updatedAccountIndex].amount = account.amount;
   bankaccounts[updatedDestAccountIndex].amount = destAccount.amount;
   transactions.push(newTrans);
-  return { error: 0, status: 200, data: { uuid: newTrans.uuid, amount: account.amount } };
+  return { error: 0, status: 200, data: { uuid: newTrans["uuid"], amount: account.amount } };
 }
 
 export default{

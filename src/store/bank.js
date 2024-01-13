@@ -91,31 +91,38 @@ export default {
             try {
                 const response = await BankAccountService.createWithdraw(state.bankUser._id, withdrawalData);
                 if (response.error === 0) {
-                    commit('updateAccountAmount', response.data.amount);
+                    commit('updateAccountAmount', response.data.data.amount);
                     commit('updateAccountNumberError', 1);
+                    return response.data.data;
                 } else {
                     console.log(response.data);
                     commit('updateAccountNumberError', -1);
+                    return response.data.error;
                 }
             } catch (err) {
                 console.error('Erreur réseau:', err);
                 commit('updateAccountNumberError', -1);
+                return err;
             }
         },
 
         async createPayment({ commit, state }, paymentData) {
             try {
-                const response = await BankAccountService.createPayment(state.bankUser._id, paymentData);
-                if (response.error === 0) {
+                const response = await BankAccountService.createPayment(state.bankUser._id, paymentData, state.bankUser.number);
+                console.log(response.data.error)
+                if (response.data.error === 0) {
                     commit('updateAccountAmount', response.data.amount);
                     commit('updateAccountNumberError', 1);
+                    return response.data.data;
                 } else {
                     console.log(response.data);
                     commit('updateAccountNumberError', -1);
+                    return response.data;
                 }
             } catch (err) {
                 console.error('Erreur réseau:', err);
                 commit('updateAccountNumberError', -1);
+                return err;
             }
         },
     }
