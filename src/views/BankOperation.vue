@@ -39,9 +39,13 @@ export default {
 
     validateOperation() {
       if (this.hasRecipient) {
-        this.createPayment({amount: this.amount, recipient: this.recipient})
+        this.createPayment({amount: this.amount, destination: this.recipient})
             .then(response => {
-              this.operationResult = `L'opération est validée avec le n° : ${response.uuid}. Vous pouvez la retrouver dans l'historique.`;
+              if (response.error === 1) {
+                this.operationResult = `Erreur lors de l'opération : ${response.data}`;
+              } else {
+                this.operationResult = `L'opération est validée avec le n° : ${response}. Vous pouvez la retrouver dans l'historique.`;
+              }
             })
             .catch(error => {
               this.operationResult = `Erreur lors de l'opération : ${error.message}`;

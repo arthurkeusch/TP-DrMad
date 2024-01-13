@@ -106,7 +106,7 @@ export default {
                 "_id": transactionTemp[i]["_id"],
                 "amount": transactionTemp[i]["amount"],
                 "account": transactionTemp[i]["account"],
-                "date": transactionTemp[i]["date"],
+                "date": this.formatReadableDate(transactionTemp[i]["date"]),
                 "sourceDestination": "D",
                 "uuid": transactionTemp[i]["uuid"]
               }

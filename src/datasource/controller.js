@@ -24,7 +24,7 @@ function getAccountTransactions(number) {
   if (!number) return {error: 1, status: 404, data: 'aucun numéro de compte bancaire fourni'};
   let account = bankaccounts.find(a => a.number === number);
   if (!account) return {error: 1, status: 404, data: 'numéro de compte bancaire incorrect'};
-  let trans = transactions.filter(t => t.account === account._id);
+  let trans = transactions.filter(t => t.account === account._id || t.destination === account._id);
   return {error: 0, status: 200, data: trans};
 }
 
@@ -49,12 +49,12 @@ function createWithdraw(id_account, amount) {
   let curentAmount = account["amount"];
   let newTrans = {
     _id: generateId(),
-    amount: -amount["amount"],
+    amount: parseInt(amount),
     account: id_account,
     date: { $date: new Date().toISOString() },
     uuid: uuidv4()
   };
-  curentAmount -= amount["amount"];
+  curentAmount += parseInt(amount);
   let updatedAccountIndex = bankaccounts.findIndex(a => a._id === id_account);
   bankaccounts[updatedAccountIndex].amount = account.amount;
   transactions.push(newTrans);
@@ -68,30 +68,27 @@ function generateId() {
 }
 
 function createPayment(id_account, amount, destination) {
-  console.log(amount) //montant + dest
-  console.log(destination) //src
   if (!id_account) return { error: 1, status: 404, data: 'aucun numéro de compte bancaire fourni' };
   let account = bankaccounts.find(a => a._id === id_account);
   if (!account) return { error: 1, status: 404, data: 'numéro de compte bancaire incorrect' };
-  let destAccount = bankaccounts.find(a => a._id === destination);
+  let destAccount = bankaccounts.find(a => a.number === destination);
   if (!destAccount) return { error: 1, status: 404, data: 'compte destinataire inexistant' };
   let newTrans = {
     _id: generateId(),
-    amount: amount["amount"],
-    account: destination,
-    destination: amount["recipient"],
+    amount: -parseInt(amount),
+    account: account["_id"],
+    destination: destAccount["_id"],
     date: { $date: new Date().toISOString() },
     uuid: uuidv4()
   };
-  console.log(newTrans)
-  account.amount -= amount;
-  destAccount.amount += amount;
+  account["amount"] -= parseInt(amount);
+  destAccount["amount"] += parseInt(amount);
   let updatedAccountIndex = bankaccounts.findIndex(a => a._id === id_account);
-  let updatedDestAccountIndex = bankaccounts.findIndex(a => a._id === destination);
-  bankaccounts[updatedAccountIndex].amount = account.amount;
-  bankaccounts[updatedDestAccountIndex].amount = destAccount.amount;
+  let updatedDestAccountIndex = bankaccounts.findIndex(a => a.number === destination);
+  bankaccounts[updatedAccountIndex].amount = account["amount"];
+  bankaccounts[updatedDestAccountIndex].amount = destAccount["amount"];
   transactions.push(newTrans);
-  return { error: 0, status: 200, data: { uuid: newTrans["uuid"], amount: account.amount } };
+  return { error: 0, status: 200, data: {uuid: newTrans["uuid"],amount: account["amount"],transaction: transactions } };
 }
 
 export default{

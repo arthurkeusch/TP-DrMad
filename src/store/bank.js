@@ -87,17 +87,16 @@ export default {
             }
         },
 
-        async createWithdraw({ commit, state }, withdrawalData) {
+        async createWithdraw({ commit, state }, {amount}) {
             try {
-                const response = await BankAccountService.createWithdraw(state.bankUser._id, withdrawalData);
+                const response = await BankAccountService.createWithdraw(state.bankUser._id, amount);
                 if (response.error === 0) {
                     commit('updateAccountAmount', response.data.data.amount);
                     commit('updateAccountNumberError', 1);
                     return response.data.data;
                 } else {
-                    console.log(response.data);
                     commit('updateAccountNumberError', -1);
-                    return response.data.error;
+                    return response.data.data;
                 }
             } catch (err) {
                 console.error('Erreur réseau:', err);
@@ -106,16 +105,15 @@ export default {
             }
         },
 
-        async createPayment({ commit, state }, paymentData) {
+        async createPayment({ commit, state }, {amount, destination}) {
             try {
-                const response = await BankAccountService.createPayment(state.bankUser._id, paymentData, state.bankUser.number);
-                console.log(response.data.error)
+                const response = await BankAccountService.createPayment(state.bankUser._id, amount, destination);
                 if (response.data.error === 0) {
-                    commit('updateAccountAmount', response.data.amount);
+                    commit('updateAccountAmount', response.data.data["amount"]);
                     commit('updateAccountNumberError', 1);
-                    return response.data.data;
+                    commit('updateAccountTransactions', response.data.data["transaction"]);
+                    return response.data.data["uuid"];
                 } else {
-                    console.log(response.data);
                     commit('updateAccountNumberError', -1);
                     return response.data;
                 }
