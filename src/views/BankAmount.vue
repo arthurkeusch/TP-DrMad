@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Solde</h1>
+    <h2>Solde :</h2>
     <div :style="balanceStyle">
       {{ formattedBalance }}
     </div>

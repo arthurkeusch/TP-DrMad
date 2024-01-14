@@ -1,13 +1,15 @@
 <template>
   <div>
-    <h1>Opération</h1>
+    <h2>Opération :</h2>
     <label for="amount">Montant:</label>
     <input v-model="amount" type="number" id="amount" />
+      <br><br>
     <div>
       <input type="checkbox" id="recipientCheckbox" v-model="hasRecipient" />
       <label for="recipientCheckbox">Destinataire</label>
       <input v-if="hasRecipient" v-model="recipient" type="text" id="recipient" placeholder="Destinataire" />
     </div>
+      <br><br>
     <button @click="validateOperation">Valider</button>
     <div v-if="operationResult">
       {{ operationResult }}

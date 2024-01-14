@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1>Account data</h1>
+    <h2>Account data</h2>
     <span>account number</span><input v-model="number">
-    <button @click="resetAccountNumber">Reset</button>
+    <button @click="resetAccountNumber" style="margin-left:10px ">Reset</button>
     <br/>
     <button @click="getAccount1(number)">Valider</button>
   </div>

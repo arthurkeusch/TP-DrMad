@@ -1,14 +1,16 @@
 <template>
   <div>
-    <h2><slot>Opérations passées</slot></h2>
+    <h2><slot>Opérations passées :</slot></h2>
     <div>
       <label for="filterCheckbox">Filtrer par période</label>
+
       <input
           type="checkbox"
           id="filterCheckbox"
           v-model="filterActive"
           @change="handleFilterCheckboxChange"
       />
+        <br><br>
       <div v-if="filterActive">
         <label for="startDate">Du</label>
         <input
@@ -18,7 +20,7 @@
             placeholder="YYYY-MM-DD"
             @input="handleStartDateInput"
         />
-        <label for="endDate">Au</label>
+        <label for="endDate"> Au</label>
         <input
             type="text"
             id="endDate"
@@ -26,6 +28,7 @@
             placeholder="YYYY-MM-DD"
             @input="handleEndDateInput"
         />
+          <br><br>
         <div v-if="!startDateValid" style="color: red">Date de début invalide</div>
         <div v-if="!endDateValid" style="color: red">Date de fin invalide</div>
       </div>
@@ -38,6 +41,7 @@
         @itemClicked="handleItemButtonClick"
         @itemCheckChanged="handleCheckboxChange"
     />
+      <br><br>
     <button @click="handleTableButtonClick">Voir</button>
   </div>
 </template>

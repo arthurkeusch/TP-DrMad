@@ -6,8 +6,9 @@
       </template>
       <template v-else-if="item.type === 'link'">
         <span @click="goTo(item.to)">
-          <slot name="menu-link" :label="item.label">{{ item.label }}</slot>
+          <slot name="menu-link" :label="item.label" >{{ item.label }}</slot>
         </span>
+          <br><br>
       </template>
     </div>
   </div>
