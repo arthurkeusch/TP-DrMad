@@ -5,7 +5,7 @@
         <span :style="style" v-html="label"></span>
       </template>
     </NavBar>
-    <h3 class="big_title">Welcome to DrMad app</h3>
+    <h3 class="big_title">Bienvenue sur l'application DrMad</h3>
       <hr>
     <router-view/>
   </div>
@@ -47,15 +47,15 @@ export default {
           ];
         } else if (this.$route.name === 'shophome' || this.$route.name === 'shopbuy' || this.$route.name === 'shoppay' || this.$route.name === 'shoporders') {
           this.titles = [
-            {label: 'Home', to: '/shop'},
+            {label: 'Accueil boutique', to: '/shop'},
             {label: 'Acheter', to: '/shop/buy'},
             {label: 'Payer', to: '/shop/pay/0'},
             {label: 'Mes commandes', to: '/shop/orders'},
-            {label: 'Logout', to: '/shop/login'}
+            {label: 'Déconnexion', to: '/shop/login'}
           ];
         }
       } else {
-        this.titles = [{ label: 'Login', to: 'white' }];
+        this.titles = [{ label: 'Connexion', to: 'white' }];
         if (this.$route.name !== 'shoplogin') this.$router.push({name: 'shoplogin'});
       }
     },

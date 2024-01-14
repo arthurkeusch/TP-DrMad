@@ -1,11 +1,11 @@
 <template>
   <div style="display: block" >
-    <h2>Login</h2>
+    <h2>Identification :</h2>
     <div class="item">
-        <span >login :</span><input v-model="login">
+        <span >identifiant :</span><input v-model="login">
     </div>
     <div class="item">
-      <span>password :</span><input v-model="password">
+      <span>mot de passe :</span><input v-model="password">
     </div>
     <div class="item">
       <button @click="shopLogin({login, password})">Login</button>
