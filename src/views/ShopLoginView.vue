@@ -23,12 +23,16 @@ export default {
     password:'',
   }),
 
+  mounted() {
+    this.shopLogout();
+  },
+
   computed: {
     ...mapState(['shopUser'])
   },
 
   methods: {
-    ...mapActions(['shopLogin'])
+    ...mapActions(['shopLogin', 'shopLogout']),
   }
 }
 </script>
