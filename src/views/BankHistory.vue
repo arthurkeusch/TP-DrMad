@@ -17,7 +17,7 @@
             type="text"
             id="startDate"
             v-model="startDate"
-            placeholder="YYYY-MM-DD"
+            placeholder="AAAA-MM-JJ"
             @input="handleStartDateInput"
         />
         <label for="endDate"> Au</label>
@@ -25,7 +25,7 @@
             type="text"
             id="endDate"
             v-model="endDate"
-            placeholder="YYYY-MM-DD"
+            placeholder="AAAA-MM-JJ"
             @input="handleEndDateInput"
         />
           <br><br>
