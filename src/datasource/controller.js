@@ -91,6 +91,10 @@ function createPayment(id_account, amount, destination) {
   return { error: 0, status: 200, data: {uuid: newTrans["uuid"],amount: account["amount"],transaction: transactions } };
 }
 
+function getAllTransactions() {
+  return {error: 0, status: 200, data: {transactions: transactions}};
+}
+
 export default{
   shopLogin,
   getAllViruses,
@@ -99,5 +103,6 @@ export default{
   getAccount,
   getTransactions,
   createWithdraw,
-  createPayment
+  createPayment,
+  getAllTransactions
 }

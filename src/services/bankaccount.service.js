@@ -24,11 +24,15 @@ async function createPaymentFromLocalSource(id_account, amount, destination) {
   return LocalSource.createPayment(id_account, amount, destination);
 }
 
+async function getAllTransactionsFromLocalSource() {
+  return LocalSource.getAllTransactions();
+}
+
 
 
 
 async function getAccountAmount(number) {
-  let response = null;
+  let response;
   try {
     response = await getAccountAmountFromLocalSource(number);
   } catch(err) {
@@ -38,7 +42,7 @@ async function getAccountAmount(number) {
 }
 
 async function getAccountTransactions(number) {
-  let response = null;
+  let response;
   try {
     response = await getAccountTransactionsFromLocalSource(number);
   } catch(err) {
@@ -48,7 +52,7 @@ async function getAccountTransactions(number) {
 }
 
 async function getAccount(number) {
-  let response = null;
+  let response;
   try {
     response = {error: 0, status: 200, data: await getAccountFromLocalSource(number)};
   } catch(err) {
@@ -58,7 +62,7 @@ async function getAccount(number) {
 }
 
 async function getTransactions(number) {
-  let response = null;
+  let response;
   try {
     response = {error: 0, status: 200, data: await getTransactionsFromLocalSource(number)};
   } catch(err) {
@@ -68,7 +72,7 @@ async function getTransactions(number) {
 }
 
 async function createWithdraw(id_account, amount) {
-  let response = null;
+  let response;
   try {
     response = {error: 0, status: 200, data: await createWithdrawFromLocalSource(id_account, amount)};
   } catch(err) {
@@ -78,9 +82,19 @@ async function createWithdraw(id_account, amount) {
 }
 
 async function createPayment(id_account, amount, destination) {
-  let response = null;
+  let response;
   try {
     response = {error: 0, status: 200, data: await createPaymentFromLocalSource(id_account, amount, destination)};
+  } catch(err) {
+    response = {error: 1, status: 404, data: 'erreur réseau, impossible de se loguer'};
+  }
+  return response;
+}
+
+async function getAllTransactions() {
+  let response;
+  try {
+    response = {error: 0, status: 200, data: await getAllTransactionsFromLocalSource()};
   } catch(err) {
     response = {error: 1, status: 404, data: 'erreur réseau, impossible de se loguer'};
   }
@@ -93,5 +107,6 @@ export default {
   getAccount,
   getTransactions,
   createWithdraw,
-  createPayment
+  createPayment,
+  getAllTransactions
 }

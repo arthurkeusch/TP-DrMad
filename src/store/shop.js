@@ -1,6 +1,7 @@
 import ShopService from '../services/shop.service'
 import router from "@/router";
 import {v4 as uuidv4} from 'uuid';
+import BankAccountService from '../services/bankaccount.service';
 
 export default {
     state: {
@@ -75,20 +76,40 @@ export default {
             return newOrder.uuid;
         },
 
-        validationPaiement({ state }, idcmd) {
+        async validationPaiement({state}, {idcmd, uuidPayement}) {
+            if (!idcmd || !uuidPayement) return -1;
+            let commandeAmount = 0;
             for (const order of state.orders) {
-                if (order.uuid === idcmd) {
-                    order.status = "finalized";
-                    return idcmd;
+                if (order !== undefined) if (order.uuid === idcmd) commandeAmount = order.total;
+            }
+            if (commandeAmount === 0) {
+                for (const order of state.shopUser.orders) {
+                    if (order !== undefined) if (order.uuid === idcmd) commandeAmount = order.total;
                 }
             }
-            for (const order of state.shopUser.orders) {
-                if (order.uuid === idcmd) {
-                    order.status = "finalized";
-                    return idcmd;
+            if (commandeAmount === 0) return -2;
+            let transactions = await BankAccountService.getAllTransactions();
+            for (const transaction of transactions.data.data.transactions) {
+                if (transaction.uuid === uuidPayement) {
+                    if (transaction.amount === commandeAmount) {
+                        for (const order of state.orders) {
+                            if (order.uuid === idcmd) {
+                                order.status = "finalized";
+                                return idcmd;
+                            }
+                        }
+                        for (const order of state.shopUser.orders) {
+                            if (order.uuid === idcmd) {
+                                order.status = "finalized";
+                                return idcmd;
+                            }
+                        }
+                        return -4;
+                    }
+                    return -3;
                 }
             }
-            return -1;
+            return -5;
         },
 
         async getAllOrderFromClient({ state }) {
