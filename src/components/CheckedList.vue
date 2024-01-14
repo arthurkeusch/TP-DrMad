@@ -1,4 +1,3 @@
-<!-- CheckedList.vue -->
 <template>
   <div >
     <div v-for="(item, index) in data" :key="index" class="liste">
@@ -36,6 +35,7 @@
 <script>
 export default {
   name: 'CheckedList',
+
   props: {
     data: Array,
     fields: Array,
@@ -47,17 +47,20 @@ export default {
     itemAmount: Boolean,
     checkbox: Boolean
   },
+
   data() {
     return {
       checkedViruses: [],
       commandeStatus: []
     };
   },
+
   computed: {
     amountInput() {
       return Array(this.data.length).fill('1');
     },
   },
+
   methods: {
     toggleCheckbox(index) {
       this.$emit('checked-changed', index);
@@ -92,16 +95,17 @@ export default {
         return " Uuid : " + item.uuid + " - Total : " + item.total + " - Date : " + item.date + " - Status : " + item.status;
       }
     },
-
   },
 };
 </script>
+
 <style>
 .liste{
     display: flex;
     justify-content: space-around;
     border-right: 2px solid darkred;
 }
+
 .item{
     margin: 10px;
 }

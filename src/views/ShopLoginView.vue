@@ -28,10 +28,11 @@ export default {
   },
 
   methods: {
-    ...mapActions(['shopLogin']),
+    ...mapActions(['shopLogin'])
   }
 }
 </script>
+
 <style>
 .item{
     margin: 10px;

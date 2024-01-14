@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 import ShopView from "@/views/ShopView.vue";
 import ShopHomeView from "@/views/ShopHomeView.vue";
 import ShopBuyView from "@/views/ShopBuy.vue";
@@ -9,8 +9,12 @@ import ShopOrdersView from "@/views/ShopOrders.vue";
 import BankHome from "@/views/BankHome.vue";
 import HomeView from "@/views/HomeView.vue";
 import BankView from "@/views/BankView.vue";
+import BankAccountView from '@/views/BankAccountView.vue';
+import BankAmount from "@/views/BankAmount.vue";
+import BankOperation from "@/views/BankOperation.vue";
+import BankHistory from "@/views/BankHistory.vue";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
@@ -60,28 +64,28 @@ const routes = [
         path: 'account',
         name: 'bankaccount',
         components: {
-          bankmain: () => import('@/views/BankAccountView.vue')
+          bankmain: BankAccountView
         }
       },
       {
         path: 'amount',
         name: 'bankamount',
         components: {
-          bankmain: () => import('@/views/BankAmount.vue')
+          bankmain: BankAmount
         }
       },
       {
         path: 'operation',
         name: 'bankoperation',
         components: {
-          bankmain: () => import('@/views/BankOperation.vue')
+          bankmain: BankOperation
         }
       },
       {
         path: 'history',
         name: 'bankhistory',
         components: {
-          bankmain: () => import('@/views/BankHistory.vue')
+          bankmain: BankHistory
         }
       }
     ]
@@ -91,13 +95,12 @@ const routes = [
     name: 'home',
     component: HomeView
   }
-
-]
+];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
+});
 
-export default router
+export default router;

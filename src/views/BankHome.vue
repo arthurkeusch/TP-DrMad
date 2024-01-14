@@ -1,10 +1,5 @@
-<script setup>
-
-</script>
-
 <template>
   <div id="page">
-
     <VerticalMenu :items="menuItems">
       <template v-slot:menu-title="{ label }">
         <h2>{{ label }}</h2>
@@ -13,11 +8,9 @@
         <button>{{ label }}</button>
       </template>
     </VerticalMenu>
-
     <div id="centre">
       <h1>Bienvenue à la banque</h1>
     </div>
-
   </div>
 </template>
 
@@ -28,6 +21,7 @@ export default {
   components: {
     VerticalMenu,
   },
+
   data() {
     return {
       menuItems: [
@@ -43,9 +37,6 @@ export default {
 </script>
 
 <style scoped>
-#navigation {
-  display: block;
-}
 #page{
   display: flex;
 }

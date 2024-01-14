@@ -1,29 +1,31 @@
-import BankAccountService from '../services/bankaccount.service'
+import BankAccountService from '../services/bankaccount.service';
 
 export default {
-    // state = les données centralisées
     state: () => ({
         accountAmount: 0,
         accountTransactions: [],
         accountNumberError: 0,
         bankUser: null
     }),
-    // mutations = fonctions synchrones pour mettre à jour le state (!!! interdit de modifier directement le state)
+
     mutations: {
         updateAccountAmount(state, amount) {
-            state.accountAmount = amount
+            state.accountAmount = amount;
         },
+
         updateAccountTransactions(state, transactions) {
-            state.accountTransactions = transactions
+            state.accountTransactions = transactions;
         },
+
         updateAccountNumberError(state, error) {
-            state.accountNumberError = error
+            state.accountNumberError = error;
         },
+
         updateBankUser(state, account) {
             state.bankUser = account;
         }
     },
-    // actions = fonctions asynchrone pour mettre à jour le state, en faisant appel aux mutations, via la fonction commit()
+
     actions: {
         async getAccountAmount({commit}, number) {
             let response = await BankAccountService.getAccountAmount(number)
@@ -31,7 +33,6 @@ export default {
                 commit('updateAccountAmount', response.data)
                 commit('updateAccountNumberError', 1)
             } else {
-                console.log(response.data)
                 commit('updateAccountNumberError', -1)
             }
         },
@@ -42,7 +43,6 @@ export default {
                 commit('updateAccountTransactions', response.data)
                 commit('updateAccountNumberError', 1)
             } else {
-                console.log(response.data)
                 commit('updateAccountNumberError', -1)
             }
         },
@@ -58,15 +58,12 @@ export default {
                         commit('updateAccountAmount', response.data)
                         commit('updateAccountNumberError', 1)
                     } else {
-                        console.log(response.data)
                         commit('updateAccountNumberError', -1)
                     }
                 } else {
-                    console.log(response.data);
                     commit('updateAccountNumberError', -1);
                 }
             } catch (err) {
-                console.error('Erreur réseau:', err);
                 commit('updateAccountNumberError', -1);
             }
         },
@@ -78,11 +75,9 @@ export default {
                     commit('updateAccountTransactions', response.data);
                     commit('updateAccountNumberError', 1);
                 } else {
-                    console.log(response.data);
                     commit('updateAccountNumberError', -1);
                 }
             } catch (err) {
-                console.error('Erreur réseau:', err);
                 commit('updateAccountNumberError', -1);
             }
         },
@@ -99,7 +94,6 @@ export default {
                     return response.data.data;
                 }
             } catch (err) {
-                console.error('Erreur réseau:', err);
                 commit('updateAccountNumberError', -1);
                 return err;
             }
@@ -118,7 +112,6 @@ export default {
                     return response.data;
                 }
             } catch (err) {
-                console.error('Erreur réseau:', err);
                 commit('updateAccountNumberError', -1);
                 return err;
             }

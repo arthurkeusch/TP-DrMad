@@ -1,4 +1,3 @@
-<!-- ShopOrders.vue -->
 <template>
   <div>
     <h2>Historique des commandes</h2>
@@ -20,6 +19,7 @@
 <script>
 import CheckedList from '../components/CheckedList.vue';
 import {mapActions} from "vuex";
+
 export default {
   components: {
     CheckedList,
@@ -36,10 +36,7 @@ export default {
   },
 
   methods: {
-    ...mapActions([
-      'getAllOrderFromClient',
-      'annulationOrder'
-    ]),
+    ...mapActions(['getAllOrderFromClient', 'annulationOrder']),
 
     payOrder(orderId) {
       this.$router.push(`/shop/pay/${orderId.uuid}`);

@@ -1,8 +1,3 @@
-<script setup>
-
-import NavBar from "@/components/NavBar.vue";
-</script>
-
 <template>
   <div>
     <div>
@@ -13,7 +8,6 @@ import NavBar from "@/components/NavBar.vue";
       </NavBar>
     </div>
     <div id="page">
-
       <VerticalMenu :items="menuItems">
         <template v-slot:menu-title="{ label }">
           <h2><b><u>{{ label }}</u></b></h2>
@@ -22,23 +16,23 @@ import NavBar from "@/components/NavBar.vue";
           <button>{{ label }}</button>
         </template>
       </VerticalMenu>
-
       <div id="centre">
         <h1>Bienvenue à la banque</h1>
         <router-view name="bankmain" :balance="currentBalance"></router-view>
       </div>
-
     </div>
   </div>
 </template>
 
 <script>
+import NavBar from "@/components/NavBar.vue";
 import VerticalMenu from "@/components/VerticalMenu";
 import {mapActions} from "vuex";
 
 export default {
   components: {
-    VerticalMenu,
+    NavBar,
+    VerticalMenu
   },
 
   mounted() {
@@ -64,29 +58,21 @@ export default {
   },
 
   methods: {
-    ...mapActions([
-      'getAccountAmount'
-    ]),
+    ...mapActions(['getAccountAmount']),
 
     async updateNavBar() {
       if (this.$store.state.shopUser !== null && this.$store.state.shopUser !== undefined) {
         if (this.$store.state.bank.bankUser !== null && this.$store.state.bank.bankUser !== undefined) {
           this.currentBalance = this.$store.state.bank.accountAmount;
         } else {
-          if (this.$route.name !== 'bankaccount') {
-            await this.$router.push({name: 'bankaccount'});
-          }
+          if (this.$route.name !== 'bankaccount') await this.$router.push({name: 'bankaccount'});
         }
         if (this.$route.name === 'bankhome' || this.$route.name === 'bankaccount') {
-          this.titles = [
-            {label: 'Mon Compte', to: '/bank/account'}
-          ];
+          this.titles = [{label: 'Mon Compte', to: '/bank/account'}];
         }
       } else {
         this.titles = [{label: 'Login', to: 'white'}];
-        if (this.$route.name !== 'shoplogin') {
-          this.$router.push({name: 'shoplogin'});
-        }
+        if (this.$route.name !== 'shoplogin') await this.$router.push({name: 'shoplogin'});
       }
     },
   }
@@ -94,9 +80,7 @@ export default {
 </script>
 
 <style scoped>
-
 #page{
   display: flex;
 }
-
 </style>

@@ -36,6 +36,8 @@ export default {
   },
 
   methods: {
+    ...mapActions(['shopLogout']),
+    
     updateNavBar() {
       if (this.$store.state.shopUser !== null && this.$store.state.shopUser !== undefined) {
         if (this.$route.name === 'home') {
@@ -54,21 +56,19 @@ export default {
         }
       } else {
         this.titles = [{ label: 'Login', to: 'white' }];
-        if (this.$route.name !== 'shoplogin') {
-          this.$router.push({name: 'shoplogin'});
-        }
+        if (this.$route.name !== 'shoplogin') this.$router.push({name: 'shoplogin'});
       }
     },
-
-    ...mapActions(['shopLogout']),
   },
 };
 </script>
+
 <style>
 #app{
     padding-left: 20px;
-    font-family: Bahnschrift;
+    font-family: Bahnschrift, serif;
 }
+
 a, button{
     border-radius: 10px;
     border: 2px solid darkred;
@@ -78,19 +78,23 @@ a, button{
     font-size: large;
     font-weight: bold;
 }
+
 span, p, label{
     color: darkred;
     font-size: x-large;
     padding-right: 20px;
 }
+
 .big_title{
     font-size: xxx-large;
     color: darkred;
 }
+
 h1{
   font-size: xx-large;
   color: #bd6905;
 }
+
 h3{
     margin-top: 20px;
     margin-bottom: 20px;

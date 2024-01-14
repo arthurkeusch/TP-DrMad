@@ -1,4 +1,4 @@
-import ShopService from '../services/shop.service'
+import ShopService from '../services/shop.service';
 import router from "@/router";
 import {v4 as uuidv4} from 'uuid';
 import BankAccountService from '../services/bankaccount.service';
@@ -70,9 +70,7 @@ export default {
             };
             state.orders.push(newOrder);
             const currentUser = state.shopUser;
-            if (currentUser) {
-                currentUser.orders.push(newOrder._id);
-            }
+            if (currentUser) currentUser.orders.push(newOrder._id);
             return newOrder.uuid;
         },
 

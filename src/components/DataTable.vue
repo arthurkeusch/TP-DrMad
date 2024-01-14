@@ -80,7 +80,7 @@ export default {
 .custom-table td {
   padding: 10px;
   text-align: center;
-  border: 1px solid #ddd; /* Ajout de la bordure entre les cellules */
+  border: 1px solid #ddd;
 }
 
 .custom-table th {

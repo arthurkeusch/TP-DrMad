@@ -1,4 +1,3 @@
-<!-- ShopBuy.vue -->
 <template>
   <div>
     <div class="shop-container">
@@ -50,13 +49,7 @@ export default {
   },
 
   methods: {
-    ...mapActions([
-      'getAllViruses',
-      'addToCartAction',
-      'removeFromCartAction',
-      'clearCartAction',
-      'checkoutAction',
-    ]),
+    ...mapActions(['getAllViruses', 'addToCartAction', 'removeFromCartAction', 'clearCartAction', 'checkoutAction',]),
 
     async initPage() {
       await this.getAllViruses();
@@ -65,13 +58,9 @@ export default {
 
     addToCart({ item, amount}) {
       const selectedVirus = item;
-      const existingItemIndex = this.cartItems.findIndex(
-          (cartItem) => cartItem.virus._id === selectedVirus._id
-      );
+      const existingItemIndex = this.cartItems.findIndex((cartItem) => cartItem.virus._id === selectedVirus._id);
       if (existingItemIndex !== -1) {
-        this.cartItems[existingItemIndex].quantity =
-            parseInt(this.cartItems[existingItemIndex].quantity) +
-            parseInt(amount);
+        this.cartItems[existingItemIndex].quantity = parseInt(this.cartItems[existingItemIndex].quantity) + parseInt(amount);
       } else {
         this.cartItems.push({ virus: selectedVirus, quantity: parseInt(amount) });
       }

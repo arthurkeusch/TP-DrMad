@@ -1,4 +1,3 @@
-<!-- BasketList.vue -->
 <template>
   <div>
     <h2>Panier</h2>
@@ -28,20 +27,25 @@ export default {
   components: {
     CheckedList,
   },
+
   props: {
     items: Array,
     checked: Array,
   },
+
   methods: {
     toggleItemCheckbox(index) {
       this.$emit('checked-changed', index);
     },
+
     removeFromCart({ index, amount }) {
       this.$emit('item-button-clicked', { item: this.items[index], amount, index });
     },
+
     clearCart() {
       this.$emit('list-button-clicked');
     },
+
     checkout() {
       this.$emit('acheter');
     },

@@ -16,14 +16,15 @@
 <script>
 export default {
   name: "VerticalMenu",
-  props: {items: Array},
+
+  props: {
+    items: Array
+  },
 
   methods: {
     goTo(route) {
       if (this.$store.state.shopUser !== null && this.$store.state.shopUser !== undefined) {
-        if (this.$route.path !== route) {
-          this.$router.push({path: route});
-        }
+        if (this.$route.path !== route) this.$router.push({path: route});
       } else {
         this.$router.push({name: 'shoplogin'});
       }

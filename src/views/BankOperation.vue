@@ -3,16 +3,12 @@
     <h1>Opération</h1>
     <label for="amount">Montant:</label>
     <input v-model="amount" type="number" id="amount" />
-
     <div>
       <input type="checkbox" id="recipientCheckbox" v-model="hasRecipient" />
       <label for="recipientCheckbox">Destinataire</label>
-
       <input v-if="hasRecipient" v-model="recipient" type="text" id="recipient" placeholder="Destinataire" />
     </div>
-
     <button @click="validateOperation">Valider</button>
-
     <div v-if="operationResult">
       {{ operationResult }}
     </div>
@@ -66,6 +62,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-</style>

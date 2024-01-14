@@ -1,4 +1,3 @@
-<!-- ShopPay.vue -->
 <template>
   <div>
     <h2>Paiement</h2>
@@ -26,16 +25,12 @@ export default {
   },
 
   mounted() {
-    if (this.$route.params.idcmd !== "0") {
-      this.idcmd = this.$route.params.idcmd;
-    }
+    if (this.$route.params.idcmd !== "0") this.idcmd = this.$route.params.idcmd;
     this.idcmdIsDefined = this.idcmd !== 0;
   },
 
   methods: {
-    ...mapActions([
-      'validationPaiement'
-    ]),
+    ...mapActions(['validationPaiement']),
 
     async paiement() {
       const res = await this.validationPaiement({idcmd: this.idcmd, uuidPayement: this.uuidPayement});

@@ -15,19 +15,17 @@ export default {
       required: true,
     },
   },
+
   computed: {
     balanceStyle() {
       return {
         color: this.balance < 0 ? 'red' : 'green',
       };
     },
+
     formattedBalance() {
       return `${this.balance} €`;
     },
   },
 };
 </script>
-
-<style scoped>
-/* Ajouter des styles au besoin */
-</style>

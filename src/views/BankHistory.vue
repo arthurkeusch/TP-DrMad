@@ -37,7 +37,7 @@
         itemButton
         @itemClicked="handleItemButtonClick"
         @itemCheckChanged="handleCheckboxChange"
-    ></DataTable>
+    />
     <button @click="handleTableButtonClick">Voir</button>
   </div>
 </template>
@@ -82,9 +82,7 @@ export default {
   },
 
   methods: {
-    ...mapActions([
-      'getAccountTransactions'
-    ]),
+    ...mapActions(['getAccountTransactions']),
 
     async loadData() {
       this.transactions = [];
@@ -195,7 +193,3 @@ export default {
   },
 };
 </script>
-
-<style>
-
-</style>

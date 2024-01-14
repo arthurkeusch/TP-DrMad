@@ -1,4 +1,3 @@
-<!-- ItemsList.vue -->
 <template>
   <div>
     <h2>Liste des articles</h2>
@@ -27,10 +26,12 @@ export default {
   components: {
     CheckedList,
   },
+
   props: {
     items: Array,
     checked: Array,
   },
+
   methods: {
     addToCart({ index, amount }) {
       this.$emit('item-button-clicked', { item: this.items[index], amount, index });
@@ -50,6 +51,3 @@ export default {
   },
 };
 </script>
-<style>
-
-</style>
