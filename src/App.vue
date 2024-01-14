@@ -67,29 +67,29 @@ export default {
 
 <style>
 #app{
-    padding-left: 20px;
-    font-family: Bahnschrift, serif;
+  padding-left: 20px;
+  font-family: Bahnschrift, serif;
 }
 
 a, button{
-    border-radius: 10px;
-    border: 2px solid darkred;
-    background-color: darkred;
-    color: aliceblue;
-    padding: 5px;
-    font-size: large;
-    font-weight: bold;
+  border-radius: 10px;
+  border: 2px solid darkred;
+  background-color: darkred;
+  color: aliceblue;
+  padding: 5px;
+  font-size: large;
+  font-weight: bold;
 }
 
 span, p, label{
-    color: darkred;
-    font-size: x-large;
-    padding-right: 20px;
+  color: darkred;
+  font-size: x-large;
+  padding-right: 20px;
 }
 
 .big_title{
-    font-size: xxx-large;
-    color: darkred;
+  font-size: xxx-large;
+  color: darkred;
 }
 
 h1{
@@ -98,7 +98,7 @@ h1{
 }
 
 h3{
-    margin-top: 20px;
-    margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 </style>
